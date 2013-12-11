@@ -5,17 +5,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import com.vaadin.tapio.googlemaps.client.GoogleMapControl;
-import com.vaadin.tapio.googlemaps.client.GoogleMapInfoWindow;
-import com.vaadin.tapio.googlemaps.client.GoogleMapInfoWindowClosedRpc;
-import com.vaadin.tapio.googlemaps.client.GoogleMapMarker;
-import com.vaadin.tapio.googlemaps.client.GoogleMapMarkerClickedRpc;
-import com.vaadin.tapio.googlemaps.client.GoogleMapMarkerDraggedRpc;
-import com.vaadin.tapio.googlemaps.client.GoogleMapMovedRpc;
-import com.vaadin.tapio.googlemaps.client.GoogleMapPolygon;
-import com.vaadin.tapio.googlemaps.client.GoogleMapPolyline;
-import com.vaadin.tapio.googlemaps.client.GoogleMapState;
-import com.vaadin.tapio.googlemaps.client.LatLon;
+import com.vaadin.tapio.googlemaps.client.*;
 import com.vaadin.tapio.googlemaps.client.events.InfoWindowClosedListener;
 import com.vaadin.tapio.googlemaps.client.events.MapMoveListener;
 import com.vaadin.tapio.googlemaps.client.events.MarkerClickListener;
@@ -23,7 +13,7 @@ import com.vaadin.tapio.googlemaps.client.events.MarkerDragListener;
 
 /**
  * The class representing Google Maps.
- * 
+ *
  * @author Tapio Aali <tapio@vaadin.com>
  */
 public class GoogleMap extends com.vaadin.ui.AbstractComponent {
@@ -97,7 +87,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
     /**
      * Initiates a new GoogleMap object with default settings from the
      * {@link GoogleMapState state object}.
-     * 
+     *
      * @param apiKeyOrClientId
      *            The Maps API key from Google or the client ID for the
      *            Business API. All client IDs begin with a gme- prefix.
@@ -118,7 +108,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
     /**
      * Creates a new GoogleMap object with the given center. Other settings will
      * be {@link GoogleMapState defaults of the state object}.
-     * 
+     *
      * @param center
      *            Coordinates of the center.
      * @param apiKeyOrClientId
@@ -134,7 +124,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
     /**
      * Creates a new GoogleMap object with the given center and zoom. Other
      * settings will be {@link GoogleMapState defaults of the state object}.
-     * 
+     *
      * @param center
      *            Coordinates of the center.
      * @param zoom
@@ -154,7 +144,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
      * Creates a new GoogleMap object with the given center, zoom and language.
      * Other settings will be {@link GoogleMapState defaults of the state
      * object}.
-     * 
+     *
      * @param center
      *            Coordinates of the center.
      * @param zoom
@@ -177,7 +167,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /*
      * (non-Javadoc)
-     * 
+     *
      * @see com.vaadin.ui.AbstractComponent#getState()
      */
     @Override
@@ -187,7 +177,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Sets the center of the map to the given coordinates.
-     * 
+     *
      * @param center
      *            The new coordinates of the center.
      */
@@ -198,7 +188,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Returns the current position of the center of the map.
-     * 
+     *
      * @return Coordinates of the center.
      */
     public LatLon getCenter() {
@@ -207,7 +197,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Zooms the map to the given value.
-     * 
+     *
      * @param zoom
      *            New amount of the zoom.
      */
@@ -218,7 +208,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Returns the current zoom of the map.
-     * 
+     *
      * @return Current value of the zoom.
      */
     public double getZoom() {
@@ -227,7 +217,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Adds a new marker to the map.
-     * 
+     *
      * @param caption
      *            Caption of the marker shown when the marker is hovered.
      * @param position
@@ -248,7 +238,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Adds a marker to the map.
-     * 
+     *
      * @param marker
      *            The marker to add.
      */
@@ -258,7 +248,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Removes a marker from the map.
-     * 
+     *
      * @param marker
      *            The marker to remove.
      */
@@ -275,7 +265,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Checks if a marker has been added to the map.
-     * 
+     *
      * @param marker
      *            The marker to check.
      * @return true, if the marker has been added to the map.
@@ -286,7 +276,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Returns the markers that have been added to he map.
-     * 
+     *
      * @return Set of the markers.
      */
     public Collection<GoogleMapMarker> getMarkers() {
@@ -295,7 +285,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Adds a MarkerClickListener to the map.
-     * 
+     *
      * @param listener
      *            The listener to add.
      */
@@ -305,7 +295,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Removes a MarkerClickListener from the map.
-     * 
+     *
      * @param listener
      *            The listener to remove.
      */
@@ -315,7 +305,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Adds a MarkerDragListener to the map.
-     * 
+     *
      * @param listener
      *            The listener to add.
      */
@@ -325,7 +315,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Removes a MarkerDragListenr from the map.
-     * 
+     *
      * @param listener
      *            The listener to remove.
      */
@@ -335,7 +325,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Adds a MapMoveListener to the map.
-     * 
+     *
      * @param listener
      *            The listener to add.
      */
@@ -345,7 +335,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Removes a MapMoveListener from the map.
-     * 
+     *
      * @param listener
      *            The listener to add.
      */
@@ -355,7 +345,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Adds an InfoWindowClosedListener to the map.
-     * 
+     *
      * @param listener
      *            The listener to add.
      */
@@ -365,7 +355,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Removes an InfoWindowClosedListener from the map.
-     * 
+     *
      * @param listener
      *            The listener to remove.
      */
@@ -375,7 +365,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Checks if limiting of the center bounds is enabled.
-     * 
+     *
      * @return true, if enabled
      */
     public boolean isCenterBoundLimitsEnabled() {
@@ -384,7 +374,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Enables/disables limiting of the center bounds.
-     * 
+     *
      * @param enable
      *            Set true to enable the limiting.
      */
@@ -394,7 +384,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Sets the limits of the bounds of the center to given values.
-     * 
+     *
      * @param limitNE
      *            The coordinates of the northeast limit.
      * @param limitSW
@@ -408,7 +398,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Adds a polygon overlay to the map.
-     * 
+     *
      * @param polygon
      *            The GoogleMapPolygon to add.
      */
@@ -418,7 +408,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Removes a polygon overlay from the map.
-     * 
+     *
      * @param polygon
      *            The GoogleMapPolygon to remove.
      */
@@ -428,7 +418,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Adds a polyline to the map.
-     * 
+     *
      * @param polyline
      *            The GoogleMapPolyline to add.
      */
@@ -438,7 +428,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Removes a polyline from the map.
-     * 
+     *
      * @param polyline
      *            The GoogleMapPolyline to add.
      */
@@ -448,7 +438,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Sets the type of the base map.
-     * 
+     *
      * @param type
      *            The new MapType to use.
      */
@@ -458,7 +448,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Returns the current type of the base map.
-     * 
+     *
      * @return The current MapType.
      */
     public MapType getMapType() {
@@ -467,7 +457,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Checks if the map is currently draggable.
-     * 
+     *
      * @return true, if the map draggable.
      */
     public boolean isDraggable() {
@@ -476,7 +466,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Enables/disables dragging of the map.
-     * 
+     *
      * @param draggable
      *            Set to true to enable dragging.
      */
@@ -486,7 +476,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Checks if the keyboard shortcuts are enabled.
-     * 
+     *
      * @return true, if the shortcuts are enabled.
      */
     public boolean areKeyboardShortcutsEnabled() {
@@ -495,7 +485,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Enables/disables the keyboard shortcuts.
-     * 
+     *
      * @param enabled
      *            Set true to enable keyboard shortcuts.
      */
@@ -505,7 +495,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Checks if the scroll wheel is enabled.
-     * 
+     *
      * @return true, if the scroll wheel is enabled
      */
     public boolean isScrollWheelEnabled() {
@@ -514,7 +504,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Enables/disables the scroll wheel.
-     * 
+     *
      * @param enabled
      *            Set true to enable scroll wheel.
      */
@@ -524,7 +514,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Returns the currently enabled map controls.
-     * 
+     *
      * @return Currently enabled map controls.
      */
     public Set<GoogleMapControl> getControls() {
@@ -533,7 +523,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Sets the controls of the map.
-     * 
+     *
      * @param controls
      *            The new controls to use.
      */
@@ -544,7 +534,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
     /**
      * Enables the given control on the map. Does nothing if the control is
      * already enabled.
-     * 
+     *
      * @param control
      *            The control to enable.
      */
@@ -555,7 +545,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
     /**
      * Removes the control from the map. Does nothing if the control isn't
      * enabled.
-     * 
+     *
      * @param control
      *            The control to remove.
      */
@@ -565,7 +555,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Enables/disables limiting of the bounds of the visible area.
-     * 
+     *
      * @param enabled
      *            Set true to enable the limiting.
      */
@@ -576,7 +566,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Checks if limiting of the bounds of the visible area is enabled.
-     * 
+     *
      * @return true if enabled
      */
     public boolean isVisibleAreaBoundLimitsEnabled() {
@@ -587,7 +577,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
      * Sets the limits of the bounds of the visible area to the given values.
      * NOTE: Using the feature does not affect zooming, consider using
      * {@link #setMinZoom(double)} too.
-     * 
+     *
      * @param limitNE
      *            The coordinates of the northeast limit.
      * @param limitSW
@@ -601,7 +591,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Sets the maximum allowed amount of zoom (default 21.0).
-     * 
+     *
      * @param maxZoom
      *            The maximum amount for zoom.
      */
@@ -611,7 +601,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Returns the current maximum amount of zoom.
-     * 
+     *
      * @return maximum amount of zoom
      */
     public double getMaxZoom() {
@@ -620,7 +610,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Sets the minimum allowed amount of zoom (default 0.0).
-     * 
+     *
      * @param minZoom
      *            The minimum amount for zoom.
      */
@@ -630,7 +620,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Returns the current minimum amount of zoom.
-     * 
+     *
      * @return minimum amount of zoom
      */
     public double getMinZoom() {
@@ -639,7 +629,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Opens an info window.
-     * 
+     *
      * @param infoWindow
      *            The window to open.
      */
@@ -649,7 +639,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Closes an info window.
-     * 
+     *
      * @param infoWindow
      *            The window to close.
      */
@@ -659,7 +649,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Checks if an info window is open.
-     * 
+     *
      * @param infoWindow
      *            The window to check.
      * @return true, if the window is open.
@@ -671,7 +661,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
     /**
      * Enables/disables new visual style of the map. NOTICE: this must be set
      * before rendering the map.
-     * 
+     *
      * @param enabled
      *            Set true to enable (defaul false).
      */
@@ -681,7 +671,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
 
     /**
      * Checks if the new visual style is enabled.
-     * 
+     *
      * @return true, if visual refresh is enabled
      */
     public boolean isVisualRefreshEnabled() {
@@ -691,7 +681,7 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
     /**
      * Tries to fit the visible area of the map inside given boundaries by
      * modifying zoom and/or center.
-     * 
+     *
      * @param boundsNE
      *            The northeast boundaries.
      * @param boundsSW
@@ -701,8 +691,8 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
         getState().fitToBoundsNE = boundsNE;
         getState().fitToBoundsSW = boundsSW;
     }
-    
-    private boolean isClientId(String apiKeyOrClientId) {
-    	return apiKeyOrClientId != null && apiKeyOrClientId.startsWith("gme-");
-    }
+
+	private static boolean isClientId(String apiKeyOrClientId) {
+		return AbstractGoogleMapState.isClientId(apiKeyOrClientId);
+	}
 }

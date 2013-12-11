@@ -8,6 +8,7 @@ import com.vaadin.annotations.VaadinServletConfiguration;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.server.VaadinServlet;
 import com.vaadin.tapio.googlemaps.GoogleMap;
+import com.vaadin.tapio.googlemaps.GoogleStreetView;
 import com.vaadin.tapio.googlemaps.client.GoogleMapControl;
 import com.vaadin.tapio.googlemaps.client.GoogleMapInfoWindow;
 import com.vaadin.tapio.googlemaps.client.GoogleMapMarker;
@@ -37,6 +38,7 @@ import com.vaadin.ui.VerticalLayout;
 public class DemoUI extends UI {
 
     private GoogleMap googleMap;
+    private GoogleStreetView googleStreetView;
     private GoogleMapMarker kakolaMarker = new GoogleMapMarker(
             "DRAGGABLE: Kakolan vankila", new LatLon(60.44291, 22.242415),
             true, null);
@@ -63,6 +65,9 @@ public class DemoUI extends UI {
 
         googleMap = new GoogleMap(new LatLon(60.440963, 22.25122), 10.0, apiKey);
         googleMap.setSizeFull();
+        googleStreetView = new GoogleStreetView(new LatLon(38.89904904367505, -77.04299926757812), apiKey);
+        googleStreetView.setSizeFull();
+
         kakolaMarker.setAnimationEnabled(false);
         googleMap.addMarker(kakolaMarker);
         googleMap.addMarker("DRAGGABLE: Paavo Nurmi Stadion", new LatLon(
@@ -279,8 +284,11 @@ public class DemoUI extends UI {
 
         tabs.addTab(tab1);
 
-        Label tab2 = new Label("Tab2!");
-        tab2.setCaption("Tab 2");
+        VerticalLayout tab2 = new VerticalLayout();
+        tab2.setSizeFull();
+        tab2.setCaption("STREET VIEW");
+        tab2.addComponent(googleStreetView);
+        tab2.setExpandRatio(googleStreetView, 1.0f);
         tabs.addTab(tab2);
     }
 }

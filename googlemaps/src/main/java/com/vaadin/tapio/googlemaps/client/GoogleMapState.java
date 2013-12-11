@@ -13,16 +13,11 @@ import com.vaadin.shared.AbstractComponentState;
  * 
  * @author Tapio Aali <tapio@vaadin.com>
  */
-public class GoogleMapState extends AbstractComponentState {
+public class GoogleMapState extends AbstractGoogleMapState {
     private static final long serialVersionUID = 646346522643L;
 
-    public String apiKey = null;
-    public String clientId = null;
-
     // defaults to the language setting of the browser
-    public String language = null;
     public String mapTypeId = "Roadmap";
-    public LatLon center = new LatLon(51.477811, -0.001475);
     public double zoom = 8.0;
     public double maxZoom = 21.0;
     public double minZoom = 0.0;
@@ -31,13 +26,10 @@ public class GoogleMapState extends AbstractComponentState {
     public boolean keyboardShortcutsEnabled = true;
     public boolean scrollWheelEnabled = true;
 
-    public boolean visualRefreshEnabled = false;
-
     public Set<GoogleMapControl> controls = new HashSet<GoogleMapControl>(
             Arrays.asList(GoogleMapControl.MapType, GoogleMapControl.Pan,
                     GoogleMapControl.Rotate, GoogleMapControl.Scale,
                     GoogleMapControl.StreetView, GoogleMapControl.Zoom));
-    public boolean locationFromClient = false;
 
     public boolean limitCenterBounds = false;
     public LatLon centerSWLimit = new LatLon(0.0, 0.0);
