@@ -288,6 +288,10 @@ public class GoogleMap extends com.vaadin.ui.AbstractComponent {
     public void clearMarkers() {
         getState().markers.clear();
     }
+    
+    public void clearPolygons(){
+        getState().polygons.clear();
+    }
 
     /**
      * Checks if a marker has been added to the map.
