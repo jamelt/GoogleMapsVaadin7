@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.RequiresResize;
 import com.google.maps.gwt.client.LatLng;
 import com.google.maps.gwt.client.StreetViewPanorama;
 import com.google.maps.gwt.client.StreetViewPanoramaOptions;
+import com.vaadin.tapio.googlemaps.client.events.RepositionListener;
 
 /**
  * Client side widget to display Google Street View. Based on GoogleMapWidget.
@@ -17,7 +18,7 @@ public class GoogleStreetViewWidget extends FlowPanel implements RequiresResize 
     public static final String CLASSNAME = "googlestreetview";
     private StreetViewPanorama streetView;
     private StreetViewPanoramaOptions streetViewOptions;
-
+		private RepositionListener repositionListener = null;
     private LatLng position = null;
 
     public GoogleStreetViewWidget() {
@@ -29,6 +30,13 @@ public class GoogleStreetViewWidget extends FlowPanel implements RequiresResize 
         streetViewOptions = StreetViewPanoramaOptions.create();
         streetViewOptions.setPosition(this.position);
         streetView = StreetViewPanorama.create(getElement(), streetViewOptions);
+
+				streetView.addPositionChangedListener(new StreetViewPanorama.PositionChangedHandler() {
+					@Override
+					public void handle() {
+						position = streetView.getPosition();
+					}
+				});
     }
 
 
@@ -76,4 +84,7 @@ public class GoogleStreetViewWidget extends FlowPanel implements RequiresResize 
         triggerResize();
     }
 
+	public void setRepositionListener(RepositionListener repositionListener) {
+		this.repositionListener = repositionListener;
+	}
 }

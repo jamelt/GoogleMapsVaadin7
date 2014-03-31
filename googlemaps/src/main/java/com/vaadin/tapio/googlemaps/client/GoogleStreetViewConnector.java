@@ -4,12 +4,14 @@ import com.google.gwt.ajaxloader.client.AjaxLoader;
 import com.google.gwt.ajaxloader.client.AjaxLoader.AjaxLoaderOptions;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.ui.Widget;
+import com.vaadin.client.communication.RpcProxy;
 import com.vaadin.client.communication.StateChangeEvent;
 import com.vaadin.client.ui.AbstractComponentConnector;
 import com.vaadin.client.ui.layout.ElementResizeEvent;
 import com.vaadin.client.ui.layout.ElementResizeListener;
 import com.vaadin.shared.ui.Connect;
 import com.vaadin.tapio.googlemaps.GoogleStreetView;
+import com.vaadin.tapio.googlemaps.client.events.RepositionListener;
 
 /**
  * The connector for the Google Maps JavaScript API v3.
@@ -18,14 +20,19 @@ import com.vaadin.tapio.googlemaps.GoogleStreetView;
  * @author Jamel Toms <jameltoms@gmail.com>
  */
 @Connect(GoogleStreetView.class)
-public class GoogleStreetViewConnector extends AbstractComponentConnector {
+public class GoogleStreetViewConnector extends AbstractComponentConnector implements
+	RepositionListener {
 
     private static final long serialVersionUID = 380172839234L;
 
     protected static boolean apiLoaded = false;
     protected static boolean mapInitiated = false;
 
-    private boolean deferred = false;
+	private GoogleStreetViewRepositionedRpc repositionedRpc = RpcProxy.create(
+		GoogleStreetViewRepositionedRpc.class, this);
+
+
+	private boolean deferred = false;
 
     public GoogleStreetViewConnector() {
     }
@@ -33,7 +40,9 @@ public class GoogleStreetViewConnector extends AbstractComponentConnector {
     private void initMap() {
         getWidget().setVisualRefreshEnabled(getState().visualRefreshEnabled);
         getWidget().initStreetView(getState().center);
-        if (deferred) {
+				getWidget().setRepositionListener(this);
+
+			if (deferred) {
             loadDeferred();
             deferred = false;
         }
@@ -118,4 +127,8 @@ public class GoogleStreetViewConnector extends AbstractComponentConnector {
     private void loadDeferred() {
     }
 
+	@Override
+	public void repositioned(LatLon position) {
+		repositionedRpc.repositioned(position);
+	}
 }

@@ -1,13 +1,19 @@
 package com.vaadin.tapio.googlemaps;
 
-import com.vaadin.tapio.googlemaps.client.GoogleStreetViewState;
-import com.vaadin.tapio.googlemaps.client.LatLon;
+import com.vaadin.tapio.googlemaps.client.*;
+import com.vaadin.tapio.googlemaps.client.events.MarkerDragListener;
 
 /**
  * The class representing Google Maps.
- *
  */
 public class GoogleStreetView extends com.vaadin.ui.AbstractComponent {
+
+	private GoogleStreetViewRepositionedRpc repositionedRpc = new GoogleStreetViewRepositionedRpc() {
+		@Override
+		public void repositioned(LatLon position) {
+			getState().center = position;
+		}
+	};
 
 	/**
 	 * Initiates a new GoogleStreetView object with default settings from the
@@ -91,6 +97,7 @@ public class GoogleStreetView extends com.vaadin.ui.AbstractComponent {
 	 */
 	public void setPosition(LatLon position) {
 		getState().center = position;
+
 	}
 
 	/**
@@ -103,6 +110,7 @@ public class GoogleStreetView extends com.vaadin.ui.AbstractComponent {
 	}
 
 	private static boolean isClientId(String apiKeyOrClientId) {
-        return apiKeyOrClientId != null && apiKeyOrClientId.startsWith("gme-");
-    }
+		return apiKeyOrClientId != null && apiKeyOrClientId.startsWith("gme-");
+	}
+
 }
