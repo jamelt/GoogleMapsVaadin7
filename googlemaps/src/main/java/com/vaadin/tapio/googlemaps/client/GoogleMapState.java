@@ -12,6 +12,7 @@ import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapInfoWindow;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapMarker;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapPolygon;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapPolyline;
+import java.util.TreeMap;
 
 /**
  * The shared state of the Google Maps. Contains also the default
@@ -51,7 +52,7 @@ public class GoogleMapState extends AbstractGoogleMapState {
     public Set<GoogleMapPolyline> polylines = new HashSet<GoogleMapPolyline>();
     public Set<GoogleMapKmlLayer> kmlLayers = new HashSet<GoogleMapKmlLayer>();
 
-    public Map<Long, GoogleMapMarker> markers = new HashMap<Long, GoogleMapMarker>();
+    public Map<Long, GoogleMapMarker> markers = new TreeMap<Long, GoogleMapMarker>();
 
     public Map<Long, GoogleMapInfoWindow> infoWindows = new HashMap<Long, GoogleMapInfoWindow>();
 
