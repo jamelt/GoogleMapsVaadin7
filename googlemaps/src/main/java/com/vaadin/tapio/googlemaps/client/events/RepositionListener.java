@@ -1,6 +1,5 @@
 package com.vaadin.tapio.googlemaps.client.events;
 
-import com.vaadin.tapio.googlemaps.client.GoogleMapMarker;
 import com.vaadin.tapio.googlemaps.client.LatLon;
 
 /**

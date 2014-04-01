@@ -20,10 +20,8 @@ import com.google.maps.gwt.client.MVCArray;
 import com.google.maps.gwt.client.MapOptions;
 import com.google.maps.gwt.client.MapTypeId;
 import com.google.maps.gwt.client.Marker;
-import com.google.maps.gwt.client.MarkerImage;
 import com.google.maps.gwt.client.MarkerOptions;
 import com.google.maps.gwt.client.MouseEvent;
-import com.google.maps.gwt.client.Point;
 import com.google.maps.gwt.client.Polygon;
 import com.google.maps.gwt.client.PolygonOptions;
 import com.google.maps.gwt.client.Polyline;
@@ -323,8 +321,6 @@ public class GoogleMapWidget extends FlowPanel implements RequiresResize {
         }
 
         if (googleMapMarker.getIconUrl() != null) {
-            //MarkerImage mi = MarkerImage.create(googleMapMarker.getIconUrl(), Point.create(0, 0), Point.create(25, 25), Size.create(50, 50));
-            //options.setIcon(mi);
             options.setIcon(googleMapMarker.getIconUrl());
         }
         return options;

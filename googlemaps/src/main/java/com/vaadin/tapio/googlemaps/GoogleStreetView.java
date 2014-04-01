@@ -1,14 +1,14 @@
 package com.vaadin.tapio.googlemaps;
 
 import com.vaadin.tapio.googlemaps.client.*;
-import com.vaadin.tapio.googlemaps.client.events.MarkerDragListener;
+import com.vaadin.tapio.googlemaps.client.rpcs.RepositionedRpc;
 
 /**
  * The class representing Google Maps.
  */
 public class GoogleStreetView extends com.vaadin.ui.AbstractComponent {
 
-	private GoogleStreetViewRepositionedRpc repositionedRpc = new GoogleStreetViewRepositionedRpc() {
+	private RepositionedRpc repositionedRpc = new RepositionedRpc() {
 		@Override
 		public void repositioned(LatLon position) {
 			getState().center = position;

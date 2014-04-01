@@ -12,6 +12,7 @@ import com.vaadin.client.ui.layout.ElementResizeListener;
 import com.vaadin.shared.ui.Connect;
 import com.vaadin.tapio.googlemaps.GoogleStreetView;
 import com.vaadin.tapio.googlemaps.client.events.RepositionListener;
+import com.vaadin.tapio.googlemaps.client.rpcs.RepositionedRpc;
 
 /**
  * The connector for the Google Maps JavaScript API v3.
@@ -28,8 +29,8 @@ public class GoogleStreetViewConnector extends AbstractComponentConnector implem
     protected static boolean apiLoaded = false;
     protected static boolean mapInitiated = false;
 
-	private GoogleStreetViewRepositionedRpc repositionedRpc = RpcProxy.create(
-		GoogleStreetViewRepositionedRpc.class, this);
+	private RepositionedRpc repositionedRpc = RpcProxy.create(
+		RepositionedRpc.class, this);
 
 
 	private boolean deferred = false;
