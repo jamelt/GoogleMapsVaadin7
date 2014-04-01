@@ -1,7 +1,15 @@
-div.googlemaps, div.googlestreetview {
-	cursor: pointer;
-	user-select: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	-ms-user-select: none;
+.googlemap img {
+    max-width: none;
+}
+
+.v-widget.googlemap {
+    min-height: 200px;
+}
+
+div.googlestreetview {
+    cursor: pointer;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }

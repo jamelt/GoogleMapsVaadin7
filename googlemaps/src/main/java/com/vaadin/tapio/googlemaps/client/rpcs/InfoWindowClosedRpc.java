@@ -1,4 +1,4 @@
-package com.vaadin.tapio.googlemaps.client;
+package com.vaadin.tapio.googlemaps.client.rpcs;
 
 import com.vaadin.shared.communication.ServerRpc;
 
@@ -9,6 +9,6 @@ import com.vaadin.shared.communication.ServerRpc;
  * @author Tapio Aali <tapio@vaadin.com>
  * 
  */
-public interface GoogleMapInfoWindowClosedRpc extends ServerRpc {
+public interface InfoWindowClosedRpc extends ServerRpc {
     public void infoWindowClosed(long windowId);
 }
