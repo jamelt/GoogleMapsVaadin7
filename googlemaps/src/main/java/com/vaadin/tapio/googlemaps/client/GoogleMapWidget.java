@@ -1,42 +1,20 @@
 package com.vaadin.tapio.googlemaps.client;
 
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.FlowPanel;
 import com.google.gwt.user.client.ui.RequiresResize;
-import com.google.maps.gwt.client.Animation;
-import com.google.maps.gwt.client.GoogleMap;
-import com.google.maps.gwt.client.InfoWindow;
-import com.google.maps.gwt.client.InfoWindowOptions;
-import com.google.maps.gwt.client.KmlLayer;
-import com.google.maps.gwt.client.KmlLayerOptions;
-import com.google.maps.gwt.client.LatLng;
-import com.google.maps.gwt.client.LatLngBounds;
-import com.google.maps.gwt.client.MVCArray;
-import com.google.maps.gwt.client.MapOptions;
-import com.google.maps.gwt.client.MapTypeId;
-import com.google.maps.gwt.client.Marker;
-import com.google.maps.gwt.client.MarkerOptions;
-import com.google.maps.gwt.client.MouseEvent;
-import com.google.maps.gwt.client.Polygon;
-import com.google.maps.gwt.client.PolygonOptions;
-import com.google.maps.gwt.client.Polyline;
-import com.google.maps.gwt.client.PolylineOptions;
-import com.google.maps.gwt.client.Size;
-import com.vaadin.tapio.googlemaps.client.events.InfoWindowClosedListener;
-import com.vaadin.tapio.googlemaps.client.events.MapClickListener;
-import com.vaadin.tapio.googlemaps.client.events.MapMoveListener;
-import com.vaadin.tapio.googlemaps.client.events.MarkerClickListener;
-import com.vaadin.tapio.googlemaps.client.events.MarkerDragListener;
+import com.google.maps.gwt.client.*;
+import com.vaadin.tapio.googlemaps.client.events.*;
 import com.vaadin.tapio.googlemaps.client.layers.GoogleMapKmlLayer;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapInfoWindow;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapMarker;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapPolygon;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapPolyline;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 
 public class GoogleMapWidget extends FlowPanel implements RequiresResize {
 

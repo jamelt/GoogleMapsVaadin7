@@ -11,18 +11,10 @@ import com.vaadin.client.ui.layout.ElementResizeEvent;
 import com.vaadin.client.ui.layout.ElementResizeListener;
 import com.vaadin.shared.ui.Connect;
 import com.vaadin.tapio.googlemaps.GoogleMap;
-import com.vaadin.tapio.googlemaps.client.events.InfoWindowClosedListener;
-import com.vaadin.tapio.googlemaps.client.events.MapClickListener;
-import com.vaadin.tapio.googlemaps.client.events.MapMoveListener;
-import com.vaadin.tapio.googlemaps.client.events.MarkerClickListener;
-import com.vaadin.tapio.googlemaps.client.events.MarkerDragListener;
+import com.vaadin.tapio.googlemaps.client.events.*;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapInfoWindow;
 import com.vaadin.tapio.googlemaps.client.overlays.GoogleMapMarker;
-import com.vaadin.tapio.googlemaps.client.rpcs.MapClickedRpc;
-import com.vaadin.tapio.googlemaps.client.rpcs.InfoWindowClosedRpc;
-import com.vaadin.tapio.googlemaps.client.rpcs.MarkerClickedRpc;
-import com.vaadin.tapio.googlemaps.client.rpcs.MarkerDraggedRpc;
-import com.vaadin.tapio.googlemaps.client.rpcs.MapMovedRpc;
+import com.vaadin.tapio.googlemaps.client.rpcs.*;
 
 /**
  * The connector for the Google Maps JavaScript API v3.
@@ -229,15 +221,12 @@ public class GoogleMapConnector extends AbstractComponentConnector implements
         getWidget().setMapType(getState().mapTypeId);
         getWidget().setControls(getState().controls);
         getWidget().setDraggable(getState().draggable);
-        getWidget().setKeyboardShortcutsEnabled(
-                getState().keyboardShortcutsEnabled);
+        getWidget().setKeyboardShortcutsEnabled(getState().keyboardShortcutsEnabled);
         getWidget().setScrollWheelEnabled(getState().scrollWheelEnabled);
         getWidget().setMinZoom(getState().minZoom);
         getWidget().setMaxZoom(getState().maxZoom);
-        if (getState().fitToBoundsNE != null
-                && getState().fitToBoundsSW != null) {
-            getWidget().fitToBounds(getState().fitToBoundsNE,
-                    getState().fitToBoundsSW);
+        if (getState().fitToBoundsNE != null && getState().fitToBoundsSW != null) {
+            getWidget().fitToBounds(getState().fitToBoundsNE, getState().fitToBoundsSW);
         }
     }
 

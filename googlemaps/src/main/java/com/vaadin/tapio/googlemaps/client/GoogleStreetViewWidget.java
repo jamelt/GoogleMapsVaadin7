@@ -6,6 +6,7 @@ import com.google.gwt.user.client.ui.RequiresResize;
 import com.google.maps.gwt.client.LatLng;
 import com.google.maps.gwt.client.StreetViewPanorama;
 import com.google.maps.gwt.client.StreetViewPanoramaOptions;
+import com.google.maps.gwt.client.StreetViewService;
 import com.vaadin.tapio.googlemaps.client.events.RepositionListener;
 
 /**
@@ -15,76 +16,82 @@ import com.vaadin.tapio.googlemaps.client.events.RepositionListener;
  */
 public class GoogleStreetViewWidget extends FlowPanel implements RequiresResize {
 
-    public static final String CLASSNAME = "googlestreetview";
-    private StreetViewPanorama streetView;
-    private StreetViewPanoramaOptions streetViewOptions;
-		private RepositionListener repositionListener = null;
-    private LatLng position = null;
+	public static final String CLASSNAME = "googlestreetview";
+	private StreetViewPanorama streetView;
+	private StreetViewService streetViewService;
 
-    public GoogleStreetViewWidget() {
-        setStyleName(CLASSNAME);
-    }
+	private StreetViewPanoramaOptions streetViewOptions;
+	private RepositionListener repositionListener = null;
+	private LatLng position = null;
 
-    public void initStreetView(LatLon center) {
-        this.position = LatLng.create(center.getLat(), center.getLon());
-        streetViewOptions = StreetViewPanoramaOptions.create();
-        streetViewOptions.setPosition(this.position);
-        streetView = StreetViewPanorama.create(getElement(), streetViewOptions);
+	public GoogleStreetViewWidget() {
+		setStyleName(CLASSNAME);
+	}
 
-				streetView.addPositionChangedListener(new StreetViewPanorama.PositionChangedHandler() {
-					@Override
-					public void handle() {
-						position = streetView.getPosition();
-					}
-				});
-    }
-
-
-    public boolean isMapInitiated() {
-        return !(streetView == null);
-    }
-
-    public void setPosition(LatLon position) {
-        this.position = LatLng.create(position.getLat(), position.getLon());
-        streetViewOptions.setPosition(this.position);
-        streetView.setPosition(this.position);
-    }
+	public void initStreetView(LatLon center) {
+		this.position = LatLng.create(center.getLat(), center.getLon());
+		streetViewService = StreetViewService.create();
+		streetViewOptions = StreetViewPanoramaOptions.create();
+		streetViewOptions.setPosition(this.position);
+		streetView = StreetViewPanorama.create(getElement(), streetViewOptions);
+		streetView.addPositionChangedListener(new StreetViewPanorama.PositionChangedHandler() {
+			@Override
+			public void handle() {
+				position = streetView.getPosition();
+				repositionListener.repositioned(DtoMapper.LAT_LNG_MAPPER.map(position));
+			}
+		});
+	}
 
 
-    public double getLatitude() {
-        return streetView.getPosition().lat();
-    }
+	public boolean isMapInitiated() {
+		return !(streetView == null);
+	}
 
-    public double getLongitude() {
-        return streetView.getPosition().lng();
-    }
+	public void setPosition(LatLon position) {
+		this.position = LatLng.create(position.getLat(), position.getLon());
+		streetViewOptions.setPosition(this.position);
+		streetView.setPosition(this.position);
+	}
 
-    public StreetViewPanorama getStreetView() {
-        return streetView;
-    }
 
-    public void triggerResize() {
-        Timer timer = new Timer() {
-            @Override
-            public void run() {
-                streetView.triggerResize();
-                streetView.setPosition(position);
-            }
-        };
-        timer.schedule(20);
-    }
+	public double getLatitude() {
+		return streetView.getPosition().lat();
+	}
 
-    public native void setVisualRefreshEnabled(boolean enabled)
-        /*-{
-            $wnd.google.maps.visualRefresh = enabled;
-        }-*/;
+	public double getLongitude() {
+		return streetView.getPosition().lng();
+	}
 
-    @Override
-    public void onResize() {
-        triggerResize();
-    }
+	public StreetViewPanorama getStreetView() {
+		return streetView;
+	}
+
+	public void triggerResize() {
+		Timer timer = new Timer() {
+			@Override
+			public void run() {
+				streetView.triggerResize();
+				streetView.setPosition(position);
+			}
+		};
+		timer.schedule(20);
+	}
+
+	public native void setVisualRefreshEnabled(boolean enabled)/*-{
+		$wnd.google.maps.visualRefresh = enabled;
+	}-*/;
+
+	@Override
+	public void onResize() {
+		triggerResize();
+	}
 
 	public void setRepositionListener(RepositionListener repositionListener) {
 		this.repositionListener = repositionListener;
+	}
+
+	public StreetViewService getStreetViewService() {
+		return streetViewService;
 	}
 }

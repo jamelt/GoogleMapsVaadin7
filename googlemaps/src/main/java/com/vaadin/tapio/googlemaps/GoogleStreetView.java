@@ -1,14 +1,29 @@
 package com.vaadin.tapio.googlemaps;
 
-import com.vaadin.tapio.googlemaps.client.*;
+import com.vaadin.tapio.googlemaps.client.GoogleStreetViewState;
+import com.vaadin.tapio.googlemaps.client.LatLon;
+import com.vaadin.tapio.googlemaps.client.events.NearestPositionListener;
+import com.vaadin.tapio.googlemaps.client.model.NearestPositionDto;
+import com.vaadin.tapio.googlemaps.client.rpcs.NearestPositionRpc;
 import com.vaadin.tapio.googlemaps.client.rpcs.RepositionedRpc;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The class representing Google Maps.
  */
 public class GoogleStreetView extends com.vaadin.ui.AbstractComponent {
 
-	private RepositionedRpc repositionedRpc = new RepositionedRpc() {
+	private List<NearestPositionListener> nearestPositionListeners = new ArrayList<NearestPositionListener>();
+	private final NearestPositionRpc nearestPositionRpc = new NearestPositionRpc() {
+		@Override
+		public void nearestPosition(NearestPositionDto nearestPosition) {
+			for (NearestPositionListener listener : nearestPositionListeners)
+				listener.nearestPosition(nearestPosition);
+		}
+	};
+	private final RepositionedRpc repositionedRpc = new RepositionedRpc() {
 		@Override
 		public void repositioned(LatLon position) {
 			getState().center = position;
@@ -29,6 +44,8 @@ public class GoogleStreetView extends com.vaadin.ui.AbstractComponent {
 		} else {
 			getState().apiKey = apiKeyOrClientId;
 		}
+		registerRpc(nearestPositionRpc);
+		registerRpc(repositionedRpc);
 	}
 
 	/**
@@ -80,24 +97,17 @@ public class GoogleStreetView extends com.vaadin.ui.AbstractComponent {
 		getState().language = language;
 	}
 
-	/*
-	 * (non-Javadoc)
-	 *
-	 * @see com.vaadin.ui.AbstractComponent#getState()
-	 */
+	private static boolean isClientId(String apiKeyOrClientId) {
+		return apiKeyOrClientId != null && apiKeyOrClientId.startsWith("gme-");
+	}
+
 	@Override
 	protected GoogleStreetViewState getState() {
 		return (GoogleStreetViewState) super.getState();
 	}
 
-	/**
-	 * Sets the position of the street view to the given coordinates.
-	 *
-	 * @param position The new coordinates of the center.
-	 */
-	public void setPosition(LatLon position) {
-		getState().center = position;
-
+	public void submitNearestLocationRequest(LatLon position) {
+		getState().relocate = position;
 	}
 
 	/**
@@ -109,8 +119,16 @@ public class GoogleStreetView extends com.vaadin.ui.AbstractComponent {
 		return getState().center;
 	}
 
-	private static boolean isClientId(String apiKeyOrClientId) {
-		return apiKeyOrClientId != null && apiKeyOrClientId.startsWith("gme-");
+	/**
+	 * Sets the position of the street view to the given coordinates.
+	 *
+	 * @param position The new coordinates of the center.
+	 */
+	public void setPosition(LatLon position) {
+		getState().center = position;
 	}
 
+	public void addNearestPositionListener(NearestPositionListener nearestPositionListener) {
+		nearestPositionListeners.add(nearestPositionListener);
+	}
 }
